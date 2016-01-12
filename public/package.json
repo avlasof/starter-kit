@@ -1,0 +1,15 @@
+{
+  "name": "stater-kit",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Sofin <avlasof@mail.ru>",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "owl.carousel": "git+https://github.com/smashingboxes/OwlCarousel2.git"
+  }
+}

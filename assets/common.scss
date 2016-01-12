@@ -1,0 +1,8 @@
+@import "node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "node_modules/owl.carousel/dist/assets/owl.carousel.min.css";
+
+@import "sass/_mixins.scss";
+
+.pics {
+    @include image2x('circle.png');
+}
