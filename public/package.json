@@ -11,5 +11,8 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "owl.carousel": "git+https://github.com/smashingboxes/OwlCarousel2.git"
+  },
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.6"
   }
 }
