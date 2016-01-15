@@ -29,7 +29,7 @@ module.exports = function(env) {
         resolve: {
             modulesDirectories: [
                 __dirname + '/public/node_modules',
-                __dirname + '/assets/blocks/' ,
+                __dirname + '/assets/blocks' ,
                 'node_modules'
             ],
             extensions: ['', '.js']

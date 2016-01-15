@@ -1,10 +1,10 @@
 /**
- * @version 2016-01-13
+ * @version 2016-01-15
  * @author Alexander Sofin <avlasof@mail.ru>
  * @link https://github.com/avlasof
  *
  * Built with https://github.com/avlasof/starter-kit
  *
 **/
-@import url(node_modules/bootstrap/dist/css/bootstrap.min.css);@import url(node_modules/owl.carousel/dist/assets/owl.carousel.min.css);.pics{background:url(/images/1x/circle.png) 0 0 no-repeat;background-size:185px 185px;width:185px;height:185px}@media (-webkit-min-device-pixel-ratio:1.5),(-webkit-min-device-pixel-ratio:2),(min-resolution:2dppx),(min-width:1600px){.pics{background-image:url(/images/2x/circle.png)}}
+@import url(node_modules/bootstrap/dist/css/bootstrap.min.css);@import url(node_modules/owl.carousel/dist/assets/owl.carousel.min.css);.modal-video .modal-dialog{position:absolute;top:50%;left:50%;margin-top:-270px;margin-left:-480px;width:960px;height:540px;background-color:#000}.modal-video__close{position:absolute;top:0;right:-50px;cursor:pointer}.modal-video__iframe{position:absolute;top:0;left:0;width:100%;height:100%}.pics{background:url(/images/1x/circle.png) 0 0 no-repeat;background-size:185px 185px;width:185px;height:185px}@media (-webkit-min-device-pixel-ratio:1.5),(-webkit-min-device-pixel-ratio:2),(min-resolution:2dppx),(min-width:1600px){.pics{background-image:url(/images/2x/circle.png)}}
 /*# sourceMappingURL=desktop.bundle.css.map */

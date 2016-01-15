@@ -15,7 +15,7 @@ gulp.task('serve', ['build'], function() {
 
     gulp.watch(config.app + '/**/*.js', ['webpack:dev']);
     gulp.watch(config.app + '/**/*.scss', ['styles']);
-    gulp.watch(config.app + '/jade/**/*.jade', ['jade']);
+    gulp.watch(config.app + '/**/*.jade', ['jade']);
     gulp.watch(config.app + '/images/**/*.{png,jpg,gif,svg}', ['images']);
     gulp.watch(config.dist + '/*.js').on('change', browserSync.reload);
 });

@@ -3,6 +3,8 @@
 
 @import "sass/_mixins.scss";
 
+@import "blocks/modal/index.scss";
+
 .pics {
     @include image2x('circle.png');
 }

@@ -7,6 +7,7 @@ const gulp = require('gulp'),
 
 function webpackCompile(env, callback) {
     webpack(webpackConfig(env), function(err, stats) {
+        if(stats.compilation.errors.length) gutil.beep();
         if(err) throw new gutil.PluginError('Webpack', err);
         gutil.log('Webpack', stats.toString({colors: true}));
         callback();

@@ -1,9 +1,19 @@
 html
   include ../includes/head.jade
   body
-    header.header header
+    header.header
+        h2 header
+    nav.nav
+        ul.list-inline
+            li
+                a link 1
+            li
+                a link 2
+            li
+                a link 3
     .content
         block content
     footer.footer
+        h2 footer
 
     include ../includes/foot.jade

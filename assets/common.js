@@ -6,3 +6,14 @@ slider.init({
     nav: true,
     margin: 0
 });
+
+
+$('.jsModalVideoShow').click(function() {
+    require.ensure([], (require) => {
+        let Modal = require('modal');
+        let modalVideo = new Modal();
+        modalVideo.show($(this));
+    });
+
+    return false;
+});
