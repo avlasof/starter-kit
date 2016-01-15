@@ -20,7 +20,7 @@ module.exports = function(env) {
             loaders: [{
               test:   /\.js$/,
               include: __dirname + '/assets',
-              loader: 'babel?presets[]=es2015'
+              loader: 'babel'
             }],
             noParse: [
                 /owl.carousel\/dist\/owl.carousel/
