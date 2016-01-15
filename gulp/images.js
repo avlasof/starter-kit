@@ -5,22 +5,10 @@ const config = require('../gulpconfig'),
     gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
-    imageResize = require('gulp-image-resize');
+    imageResize = require('gulp-image-resize'),
+    svg2png = require('gulp-svg2png');
 
-function gulpTaskImagemin(src) {
-    let imageminOptions = {
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()]
-        };
-
-    gulp.src(src)
-        .pipe(changed(config.dist + '/images/2x'))
-        .pipe(imagemin(imageminOptions))
-        .pipe(gulp.dest(config.dist + '/images/2x'));
-}
-
-function gulpTaskImageResize(src) {
+function gulpTask(src, dist, task) {
     let imageminOptions = {
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
@@ -32,21 +20,42 @@ function gulpTaskImageResize(src) {
             imageMagick: true
         };
 
-    gulp.src(src)
-        .pipe(changed(config.dist + '/images/1x'))
-        .pipe(imageResize(imageResizeOptions))
-        .pipe(imagemin(imageminOptions))
-        .pipe(gulp.dest(config.dist + '/images/1x'));
+    if (task === 'resize') {
+        gulp.src(src)
+            .pipe(changed(config.dist + '/images/' + dist))
+            .pipe(imageResize(imageResizeOptions))
+            .pipe(imagemin(imageminOptions))
+            .pipe(gulp.dest(config.dist + '/images/' + dist));
+    } else if(task === 'svg2png') {
+        gulp.src(src)
+            .pipe(changed(config.dist + '/images/' + dist))
+            .pipe(imagemin(imageminOptions))
+            .pipe(svg2png())
+            .pipe(gulp.dest(config.dist + '/images/' + dist));
+    } else {
+        gulp.src(src)
+            .pipe(changed(config.dist + '/images/' + dist))
+            .pipe(imagemin(imageminOptions))
+            .pipe(gulp.dest(config.dist + '/images/' + dist));
+    }
+
 }
 
 gulp.task('imagemin', function() {
-    gulpTaskImagemin([config.app + '/images/**/*.{png,jpg,gif,svg}']);
-    gulpTaskImagemin([config.app + '/**/*.{png,jpg,gif,svg}', '!' + config.app + '/images/**/*']);
+    gulpTask([config.app + '/images/**/*.{png,jpg,gif}'], '2x');
+    gulpTask([config.app + '/**/*.{png,jpg,gif}', '!' + config.app + '/images/**/*'], '2x');
 });
 
-gulp.task('imageresize', function() {
-    gulpTaskImageResize([config.app + '/images/**/*.{png,jpg,gif,svg}']);
-    gulpTaskImageResize([config.app + '/**/*.{png,jpg,gif,svg}', '!' + config.app + '/images/**/*']);
+gulp.task('imageResize', function() {
+    gulpTask([config.app + '/images/**/*.{png,jpg,gif}'], '1x', 'resize');
+    gulpTask([config.app + '/**/*.{png,jpg,gif}', '!' + config.app + '/images/**/*'], '1x', 'resize');
 });
 
-gulp.task('images', ['imagemin', 'imageresize']);
+gulp.task('imageSVG', function() {
+    gulpTask([config.app + '/images/**/*.svg'], 'svg');
+    gulpTask([config.app + '/**/*.svg', '!' + config.app + '/images/**/*'], 'svg');
+    gulpTask([config.app + '/images/**/*.svg'], 'svg', 'svg2png');
+    gulpTask([config.app + '/**/*.svg', '!' + config.app + '/images/**/*'], 'svg', 'svg2png');
+});
+
+gulp.task('images', ['imagemin', 'imageResize', 'imageSVG']);

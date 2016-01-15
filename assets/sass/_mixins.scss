@@ -8,6 +8,12 @@
     background: linear-gradient($color-top 0%, $color-bottom 100%);
 }
 
+@mixin imageSVG($image) {
+    background: url($image + '.png') !important;
+    background-image: url($image + '.svg'), none !important;
+    background-repeat: no-repeat !important;
+}
+
 @mixin image1x($image, $type) {
     width: width('/public/images/1x/' + $image);
     height: height('/public/images/1x/' + $image);
