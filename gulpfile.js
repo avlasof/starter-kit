@@ -2,8 +2,9 @@
 
 const config = require('./gulpconfig'),
     browserSync = require('browser-sync'),
-    // git = require('gulp-git'),
-    gulp = require('gulp');
+    git = require('gulp-git'),
+    gulp = require('gulp'),
+    gutil = require('gulp-util');
 
 require('./gulp/styles');
 require('./gulp/templates');
@@ -22,10 +23,17 @@ gulp.task('serve', ['build'], function() {
     gulp.watch(config.dist + '/*.js').on('change', browserSync.reload);
 });
 
-gulp.task('build', ['styles', 'jade', 'images', 'webpack:prod'], function() {
-    // gulp.task('build', ['styles', 'scripts', 'templates', 'images'], function() {
-    // return gulp.src('./assets/*')
-    //     .pipe(git.commit('Markup #1'));
-});
+gulp.task('build', ['styles', 'jade', 'images', 'webpack:prod']);
 
 gulp.task('default', ['serve']);
+
+gulp.task('git', ['build'], function() {
+    return gulp.src('./git/*')
+        .pipe(git.add({
+            args: 'public/*'
+        }))
+        .pipe(git.commit('Frontend build').on('error', function(err) {
+            gutil.log(gutil.colors.red(err.message));
+            this.emit('end');
+        }));
+});
