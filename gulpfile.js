@@ -1,9 +1,9 @@
 'use strict';
 
 const config = require('./gulpconfig'),
-      browserSync = require('browser-sync'),
-      // git = require('gulp-git'),
-      gulp = require('gulp');
+    browserSync = require('browser-sync'),
+    // git = require('gulp-git'),
+    gulp = require('gulp');
 
 require('./gulp/styles');
 require('./gulp/templates');
@@ -11,7 +11,9 @@ require('./gulp/images');
 require('./gulp/webpack');
 
 gulp.task('serve', ['build'], function() {
-    browserSync.init({server: config.dist});
+    browserSync.init({
+        server: config.dist
+    });
 
     gulp.watch(config.app + '/**/*.js', ['webpack:dev']);
     gulp.watch(config.app + '/**/*.scss', ['styles']);
@@ -21,7 +23,7 @@ gulp.task('serve', ['build'], function() {
 });
 
 gulp.task('build', ['styles', 'jade', 'images', 'webpack:prod'], function() {
-// gulp.task('build', ['styles', 'scripts', 'templates', 'images'], function() {
+    // gulp.task('build', ['styles', 'scripts', 'templates', 'images'], function() {
     // return gulp.src('./assets/*')
     //     .pipe(git.commit('Markup #1'));
 });

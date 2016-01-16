@@ -12,7 +12,7 @@ const config = require('../gulpconfig'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     postcss = require('gulp-postcss'),
-    assets  = require('postcss-assets');
+    assets = require('postcss-assets');
 
 function gulpTask(src, dist, autoprefixerBrowsers) {
     gulp.src(config.app + src)
@@ -22,7 +22,9 @@ function gulpTask(src, dist, autoprefixerBrowsers) {
             gutil.beep();
             this.emit('end');
         }))
-        .pipe(postcss([assets({loadPaths: ['../public/images']})]).on('error', function(err) {
+        .pipe(postcss([assets({
+            loadPaths: ['../public/images']
+        })]).on('error', function(err) {
             gutil.log(gutil.colors.red(err.message));
             gutil.beep();
             this.emit('end');
@@ -30,13 +32,17 @@ function gulpTask(src, dist, autoprefixerBrowsers) {
         .pipe(autoprefixer({
             browsers: autoprefixerBrowsers,
         }))
-        .pipe(cssBase64({baseDir: '../public/images'}))
+        .pipe(cssBase64({
+            baseDir: '../public/images'
+        }))
         .pipe(cssnano())
         .pipe(header(config.banner))
         .pipe(concat(dist))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.dist))
-        .pipe(browserSync.stream({match: '**/*.css'}));
+        .pipe(browserSync.stream({
+            match: '**/*.css'
+        }));
 }
 
 gulp.task('sass', function() {

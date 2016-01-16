@@ -6,7 +6,7 @@ const config = require('../gulpconfig'),
     gulp = require('gulp'),
     jade = require('gulp-jade');
 
-gulp.task('jade', function(){
+gulp.task('jade', function() {
     let jadeOptions = {
         doctype: 'html',
         pretty: true

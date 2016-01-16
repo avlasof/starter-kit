@@ -7,7 +7,6 @@ slider.init({
     margin: 0
 });
 
-
 $('.jsModalVideoShow').click(function() {
     require.ensure([], (require) => {
         let Modal = require('modal');

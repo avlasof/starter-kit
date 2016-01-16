@@ -11,7 +11,9 @@ const config = require('../gulpconfig'),
 function gulpTask(src, dist, task) {
     let imageminOptions = {
             progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
             use: [pngquant()]
         },
         imageResizeOptions = {
@@ -26,7 +28,7 @@ function gulpTask(src, dist, task) {
             .pipe(imageResize(imageResizeOptions))
             .pipe(imagemin(imageminOptions))
             .pipe(gulp.dest(config.dist + '/images/' + dist));
-    } else if(task === 'svg2png') {
+    } else if (task === 'svg2png') {
         gulp.src(src)
             .pipe(changed(config.dist + '/images/' + dist))
             .pipe(imagemin(imageminOptions))
