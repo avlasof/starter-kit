@@ -30,6 +30,13 @@ gulp.task('default', ['serve']);
 gulp.task('git', ['build'], function() {
     return gulp.src('./git/*')
         .pipe(git.add({
+            args: 'assets/*'
+        }))
+        .pipe(git.commit('Frontend markup').on('error', function(err) {
+            gutil.log(gutil.colors.red(err.message));
+            this.emit('end');
+        }))
+        .pipe(git.add({
             args: 'public/*'
         }))
         .pipe(git.commit('Frontend build').on('error', function(err) {
