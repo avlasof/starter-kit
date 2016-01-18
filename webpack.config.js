@@ -1,7 +1,7 @@
 'use strict';
 
 const gulpConfig = require('./gulpconfig'),
-      webpack = require('webpack');
+    webpack = require('webpack');
 
 module.exports = function(env) {
     let config = {
@@ -18,9 +18,9 @@ module.exports = function(env) {
         devtool: env === 'development' ? 'cheap-inline-module-source-map' : null,
         module: {
             loaders: [{
-              test:   /\.js$/,
-              include: __dirname + '/assets',
-              loader: 'babel'
+                test: /\.js$/,
+                include: __dirname + '/assets',
+                loader: 'babel'
             }],
             noParse: [
                 /owl.carousel\/dist\/owl.carousel/
@@ -29,7 +29,7 @@ module.exports = function(env) {
         resolve: {
             modulesDirectories: [
                 __dirname + '/public/node_modules',
-                __dirname + '/assets/blocks' ,
+                __dirname + '/assets/blocks',
                 'node_modules'
             ],
             extensions: ['', '.js']
@@ -39,11 +39,13 @@ module.exports = function(env) {
 
     if (env === 'production') {
         let banner = gulpConfig.banner.replace(
-                '<%= new Date().toISOString().split("T")[0] %>', new Date().toISOString().split("T")[0]);
+            '<%= new Date().toISOString().split("T")[0] %>', new Date().toISOString().split('T')[0]);
 
         config.plugins.push(
             new webpack.optimize.UglifyJsPlugin(),
-            new webpack.BannerPlugin(banner, {raw: true})
+            new webpack.BannerPlugin(banner, {
+                raw: true
+            })
         );
     }
 
