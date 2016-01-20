@@ -11,7 +11,7 @@ export default class Modal {
     show(element) {
         let video = this.setVideo(element);
 
-        if(!video) return;
+        if (!video) return;
 
         this.container.modal('show');
         setTimeout(() => this.iframe.html(video).hide().fadeIn(1000), 600);
