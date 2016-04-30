@@ -9,7 +9,7 @@ const config = require('../gulpconfig'),
     svg2png = require('gulp-svg2png');
 
 function gulpTask(src, dist, task) {
-    let imageminOptions = {
+    const imageminOptions = {
             progressive: true,
             svgoPlugins: [{
                 removeViewBox: false

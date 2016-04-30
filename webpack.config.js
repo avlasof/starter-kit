@@ -4,7 +4,7 @@ const gulpConfig = require('./gulpconfig'),
     webpack = require('webpack');
 
 module.exports = function(env) {
-    let config = {
+    const config = {
         context: __dirname + '/assets',
         entry: {
             desktop: './common',
@@ -38,7 +38,7 @@ module.exports = function(env) {
     };
 
     if (env === 'production') {
-        let banner = gulpConfig.banner.replace(
+        const banner = gulpConfig.banner.replace(
             '<%= new Date().toISOString().split("T")[0] %>', new Date().toISOString().split('T')[0]);
 
         config.plugins.push(
