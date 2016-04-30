@@ -14,7 +14,13 @@ const config = require('../gulpconfig'),
     postcss = require('gulp-postcss'),
     assets = require('postcss-assets');
 
-function gulpTask(src, dist, autoprefixerBrowsers) {
+function stylesTransform(src, dist) {
+    let autoprefixerBrowsers = ['last 2 version', 'safari 6', 'ie 8', 'ie 9', 'opera 12.1'];
+
+    if (dist === 'mobile.bundle.css') {
+        ['last 2 version', 'safari 6', 'ios 6', 'android 4']
+    }
+
     gulp.src(config.app + src)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', function(err) {
@@ -45,9 +51,7 @@ function gulpTask(src, dist, autoprefixerBrowsers) {
         }));
 }
 
-gulp.task('sass', function() {
-    gulpTask('/common.scss', 'desktop.bundle.css', ['last 2 version', 'safari 6', 'ie 8', 'ie 9', 'opera 12.1']);
-    gulpTask('/common-mobile.scss', 'mobile.bundle.css', ['last 2 version', 'safari 6', 'ios 6', 'android 4']);
+gulp.task('styles', function() {
+    stylesTransform('/common.scss', 'desktop.bundle.css');
+    stylesTransform('/common-mobile.scss', 'mobile.bundle.css');
 });
-
-gulp.task('styles', ['sass']);
