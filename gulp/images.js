@@ -8,12 +8,11 @@ const config = require('../gulpconfig'),
     imageResize = require('gulp-image-resize'),
     svg2png = require('gulp-svg2png');
 
-function gulpTask(src, dist, task) {
+function rasterImageTransform(src, subfolder) {
+    subfolder = subfolder || '';
+
     const imageminOptions = {
             progressive: true,
-            svgoPlugins: [{
-                removeViewBox: false
-            }],
             use: [pngquant()]
         },
         imageResizeOptions = {
@@ -22,42 +21,39 @@ function gulpTask(src, dist, task) {
             imageMagick: true
         };
 
-    if (task === 'resize') {
-        gulp.src(src)
-            .pipe(changed(config.dist + '/images/' + dist))
-            .pipe(imageResize(imageResizeOptions))
-            .pipe(imagemin(imageminOptions))
-            .pipe(gulp.dest(config.dist + '/images/' + dist));
-    } else if (task === 'svg2png') {
-        gulp.src(src)
-            .pipe(changed(config.dist + '/images/' + dist))
-            .pipe(imagemin(imageminOptions))
-            .pipe(svg2png())
-            .pipe(gulp.dest(config.dist + '/images/' + dist));
-    } else {
-        gulp.src(src)
-            .pipe(changed(config.dist + '/images/' + dist))
-            .pipe(imagemin(imageminOptions))
-            .pipe(gulp.dest(config.dist + '/images/' + dist));
-    }
-
+    return gulp.src(src)
+        .pipe(changed(config.dist + '/images/2x/' + subfolder))
+        .pipe(imagemin(imageminOptions))
+        .pipe(gulp.dest(config.dist + '/images/2x/' + subfolder))
+        .pipe(changed(config.dist + '/images/1x/' + subfolder))
+        .pipe(imageResize(imageResizeOptions))
+        .pipe(imagemin(imageminOptions))
+        .pipe(gulp.dest(config.dist + '/images/1x/' + subfolder));
 }
 
-gulp.task('imagemin', function() {
-    gulpTask([config.app + '/images/**/*.{png,jpg,gif}'], '2x');
-    gulpTask([config.app + '/**/*.{png,jpg,gif}', '!' + config.app + '/images/**/*'], '2x');
-});
+function vectorImageTransform(src, subfolder) {
+    subfolder = subfolder || '';
 
-gulp.task('imageResize', function() {
-    gulpTask([config.app + '/images/**/*.{png,jpg,gif}'], '1x', 'resize');
-    gulpTask([config.app + '/**/*.{png,jpg,gif}', '!' + config.app + '/images/**/*'], '1x', 'resize');
-});
+    const imageminOptions = {
+            progressive: true,
+            svgoPlugins: [{
+                removeViewBox: false
+            }],
+            use: [pngquant()]
+        };
 
-gulp.task('imageSVG', function() {
-    gulpTask([config.app + '/images/**/*.svg'], 'svg');
-    gulpTask([config.app + '/**/*.svg', '!' + config.app + '/images/**/*'], 'svg');
-    gulpTask([config.app + '/images/**/*.svg'], 'svg', 'svg2png');
-    gulpTask([config.app + '/**/*.svg', '!' + config.app + '/images/**/*'], 'svg', 'svg2png');
-});
+    return gulp.src(src)
+        .pipe(changed(config.dist + '/images/svg/' + subfolder))
+        .pipe(imagemin(imageminOptions))
+        .pipe(gulp.dest(config.dist + '/images/svg/' + subfolder))
+        .pipe(svg2png())
+        .pipe(imagemin(imageminOptions))
+        .pipe(gulp.dest(config.dist + '/images/svg/' + subfolder));
+}
 
-gulp.task('images', ['imagemin', 'imageResize', 'imageSVG']);
+gulp.task('images', function() {
+    rasterImageTransform([config.app + '/images/**/*.{png,jpg,gif}']);
+    rasterImageTransform([config.app + '/blocks/**/*.{png,jpg,gif}'], 'blocks');
+    vectorImageTransform([config.app + '/images/**/*.svg']);
+    vectorImageTransform([config.app + '/blocks/**/*.svg'], 'blocks');
+});
