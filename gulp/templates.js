@@ -9,7 +9,7 @@ const config = require('../gulpconfig'),
 gulp.task('jade', function() {
     const jadeOptions = {
         doctype: 'html',
-        pretty: true
+        pretty: '    '
     };
 
     return gulp.src(config.app + '/jade/*.jade')
