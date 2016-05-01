@@ -18,7 +18,7 @@ function stylesTransform(src, dist) {
     let autoprefixerBrowsers = ['last 2 version', 'safari 6', 'ie 8', 'ie 9'];
 
     if (dist === 'mobile.bundle.css') {
-        autoprefixerBrowsers = ['last 4 version'];
+        autoprefixerBrowsers = ['last 2 version'];
     }
 
     return gulp.src(config.app + src)
