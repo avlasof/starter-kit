@@ -3,13 +3,21 @@
 const gulpConfig = require('./gulpconfig'),
     webpack = require('webpack');
 
+let entryValue = {
+    desktop: './common',
+    mobile: './common-mobile'
+}
+
+if (!gulpConfig.mobile) {
+    entryValue = {
+        desktop: './common'
+    }
+}
+
 module.exports = function(env) {
     const config = {
         context: __dirname + '/assets',
-        entry: {
-            desktop: './common',
-            mobile: './common-mobile'
-        },
+        entry: entryValue,
         output: {
             path: __dirname + '/public',
             filename: '[name].bundle.js',

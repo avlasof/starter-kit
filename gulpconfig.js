@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    mobile: true,
     app: 'assets',
     dist: 'public',
     banner: '/**\n' +

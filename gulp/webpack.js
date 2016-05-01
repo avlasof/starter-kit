@@ -6,7 +6,7 @@ const gulp = require('gulp'),
     webpackConfig = require('../webpack.config.js');
 
 function webpackCompile(env, callback) {
-    webpack(webpackConfig(env), function(err, stats) {
+    return webpack(webpackConfig(env), function(err, stats) {
         if (stats.compilation.errors.length) gutil.beep();
         if (err) throw new gutil.PluginError('Webpack', err);
         gutil.log('Webpack', stats.toString({

@@ -21,7 +21,7 @@ function stylesTransform(src, dist) {
         ['last 2 version', 'safari 6', 'ios 6', 'android 4']
     }
 
-    gulp.src(config.app + src)
+    return gulp.src(config.app + src)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', function(err) {
             gutil.log(gutil.colors.red(err.message));
@@ -53,5 +53,7 @@ function stylesTransform(src, dist) {
 
 gulp.task('styles', function() {
     stylesTransform('/common.scss', 'desktop.bundle.css');
-    stylesTransform('/common-mobile.scss', 'mobile.bundle.css');
+    if (config.mobile) {
+        stylesTransform('/common-mobile.scss', 'mobile.bundle.css');
+    }
 });
