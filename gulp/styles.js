@@ -15,10 +15,10 @@ const config = require('../gulpconfig'),
     assets = require('postcss-assets');
 
 function stylesTransform(src, dist) {
-    let autoprefixerBrowsers = ['last 2 version', 'safari 6', 'ie 8', 'ie 9', 'opera 12.1'];
+    let autoprefixerBrowsers = ['last 2 version', 'safari 6', 'ie 8', 'ie 9'];
 
     if (dist === 'mobile.bundle.css') {
-        ['last 2 version', 'safari 6', 'ios 6', 'android 4']
+        autoprefixerBrowsers = ['last 4 version'];
     }
 
     return gulp.src(config.app + src)
