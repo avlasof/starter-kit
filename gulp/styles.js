@@ -39,7 +39,7 @@ function stylesTransform(src, dist) {
             browsers: autoprefixerBrowsers,
         }))
         .pipe(cssBase64({
-            baseDir: '../public/images'
+            baseDir: '../public'
         }))
         .pipe(cssnano())
         .pipe(header(config.banner))
