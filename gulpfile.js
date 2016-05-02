@@ -32,15 +32,15 @@ gulp.task('git', ['build'], function() {
         .pipe(git.add({
             args: 'assets/*'
         }))
-        .pipe(git.commit('Frontend markup').on('error', function(err) {
-            gutil.log(gutil.colors.red(err.message));
-            this.emit('end');
+        .pipe(git.commit('Frontend source').on('error', function(err) {
+            gutil.beep();
+            if (err) throw err;
         }))
         .pipe(git.add({
             args: 'public/*'
         }))
         .pipe(git.commit('Frontend build').on('error', function(err) {
-            gutil.log(gutil.colors.red(err.message));
-            this.emit('end');
+            gutil.beep();
+            if (err) throw err;
         }));
 });
