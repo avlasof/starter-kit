@@ -15,9 +15,9 @@
 }
 
 @mixin image1x($image, $type) {
-    width: width('public/images/1x/' + $image);
-    height: height('public/images/1x/' + $image);
-    background: url('images/1x/' + $image) 0 0 no-repeat;
+    width: width('public/images/2x/' + $image);
+    height: height('public/images/2x/' + $image);
+    background: url('images/2x/' + $image) 0 0 no-repeat;
 }
 
 @mixin image2x($image) {
@@ -41,4 +41,12 @@
             background-image: url('images/2x/' + $image);
         }
     }
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
