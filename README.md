@@ -13,7 +13,7 @@ $ npm install --global gulp-cli
 ```
 
 ## Установка
-Перейти в корневую папку проекта
+Перейти в корневую папку проекта, запустить
 ```bash
 $ npm i
 ```
@@ -29,29 +29,22 @@ $ gulp build
 ```
 
 ## Структура проекта
-```bash
-assets/**/*.{jade, js(es6), scss} - исходники
-```
-```bash
-assets/blocks/*.{jade, js(es6), scss} - независимые блоки
-```
-```bash
-public/**/*.{html, js(es5), css} - сборка
-```
-```bash
-public/fonts - шрифты
-```
-```bash
-public/node_modules/* - сторонние библиотеки для frontend
-```
+> assets/**/*.{jade, js(es6), scss} - исходники
+
+> assets/blocks/*.{jade, js(es6), scss} - независимые блоки
+
+> public/**/*.{html, js(es5), css} - сборка
+
+> public/fonts - шрифты
+
+> public/node_modules/* - сторонние библиотеки для frontend
 
 ## Работа с изображениями
-```bash
-assets/images/* - загружать изображение 2x(для ретины)
-```
+> assets/images/* - загружать изображение 2x(для ретины)
+
 на выходе получаются
-```bash
-public/images/2x/* - оптимизированное изображение 2x(для ретины)
-public/images/1x/* - оптимизированное изображение 1x
-```
+> public/images/2x/* - оптимизированное изображение 2x(для ретины)
+
+> public/images/1x/* - оптимизированное изображение 1x
+
 Если исходное изображение не для ретины, загружать сразу в public/images/2x/*
