@@ -26,10 +26,11 @@
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-svg2png": "^1.0.0",
+    "gulp-util": "^3.0.7",
     "imagemin-pngquant": "^4.2.0",
     "optipng-bin": "^3.0.4",
     "postcss-assets": "^3.0.3",
     "rimraf": "^2.5.0",
-    "webpack": "^1.12.10"
+    "webpack": "^1.13.2"
   }
 }
